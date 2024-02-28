@@ -3,7 +3,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import { IUser } from "@/types";
 import { getCurrentUser } from "@/lib/appwrite/api";
-import { Models } from "appwrite";
 
 export const INITIAL_USER = {
   id: "",
