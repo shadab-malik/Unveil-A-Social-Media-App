@@ -26,8 +26,6 @@ const PostDetails = () => {
   const relatedPosts = userPosts?.documents.filter(
     (userPost: any) => userPost.$id !== id
   ); //all posts except current one.
-
-  console.log(post?.creator.$id, id);
   const handleDeletePost = () => {
     deletePost({ postId: id, imageId: post?.imageId });
     navigate(-1);

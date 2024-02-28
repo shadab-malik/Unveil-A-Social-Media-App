@@ -18,7 +18,6 @@ const AllUsers = () => {
     isError: isErrorCreators,
   } = useGetUsers();
 
-  console.log(creators);
   if (isErrorCreators) {
     toast({ title: "Something went wrong." });
     return;

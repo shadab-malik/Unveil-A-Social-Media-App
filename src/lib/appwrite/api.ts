@@ -114,7 +114,7 @@ export async function createPost(post: INewPost) {
     }
 
     // Convert tags into array
-    const tags = post.tags?.replace(/ /g, "").split(",") || [];
+    const tags = post?.tags?.replace(/ /g, "").split(",") || [];
 
     // Create post
     const newPost = await databases.createDocument(
@@ -305,7 +305,7 @@ export async function updatePost(post: IUpdatePost) {
     }
 
     // Convert tags into array
-    const tags = post.tags?.replace(/ /g, "").split(",") || [];
+    const tags = post?.tags?.replace(/ /g, "").split(",") || [];
 
     //  Update post
     const updatedPost = await databases.updateDocument(

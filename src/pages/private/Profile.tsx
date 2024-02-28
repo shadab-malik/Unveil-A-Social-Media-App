@@ -7,7 +7,7 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import { LikedPosts } from "@/_root/pages";
+import { LikedPosts } from "@/pages/private";
 import { useUserContext } from "@/context/AuthContext";
 import {
   useGetUserById,

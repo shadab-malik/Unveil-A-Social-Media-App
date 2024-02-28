@@ -38,8 +38,6 @@ const Explore = () => {
   const debouncedSearch = useDebounce(searchValue, 500);
   const { data: searchedPosts, isFetching: isSearchFetching } =
     useSearchPosts(debouncedSearch);
-
-  console.log(posts);
   useEffect(() => {
     if (inView && !searchValue) {
       fetchNextPage();

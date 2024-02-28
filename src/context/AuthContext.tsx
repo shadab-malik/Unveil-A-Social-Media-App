@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import { IUser } from "@/types";
 import { getCurrentUser } from "@/lib/appwrite/api";
+import { Models } from "appwrite";
 
 export const INITIAL_USER = {
   id: "",
@@ -52,7 +53,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           email: currentAccount.email,
           imageUrl: currentAccount.imageUrl,
           bio: currentAccount.bio,
-          followed:currentAccount.followed || [],
+          followed: currentAccount.followed || [],
         });
         setIsAuthenticated(true);
 
