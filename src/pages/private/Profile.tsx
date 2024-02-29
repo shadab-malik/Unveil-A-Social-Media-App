@@ -25,6 +25,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import FollowList from "@/components/shared/FollowList";
+import { checkIsFollowed } from "@/lib/utils";
 
 interface StabBlockProps {
   value: string | number;
@@ -49,9 +50,9 @@ const StatBlock = ({ value, label, list }: StabBlockProps) => (
           `No ${label}`
         ) : (
           <ul className="flex-row w-full">
-            {list?.map((id) => (
-              <li key={id} className="flex-row min-w-[200px] w-full p-4">
-                <FollowList followerId={id} />
+            {list?.map((data) => (
+              <li key={data} className="flex-row min-w-[200px] w-full p-4">
+                <FollowList followerData={data} />
               </li>
             ))}
           </ul>
@@ -77,22 +78,24 @@ const Profile = () => {
       </div>
     );
 
-  const checkisFollowing = (userId: string) => {
-    return currentUser.followers.includes(userId);
-  };
-
   const followingHandler = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.stopPropagation();
     let followers = [...currentUser.followers];
     let followed = [...user.followed];
-    if (followers.includes(user.id)) {
-      followers = followers.filter((id) => id != user.id);
-      followed = followed.filter((id) => id != currentUser.$id);
+    if (checkIsFollowed(currentUser.followers, user.id)) {
+      followers = followers.filter((data) => JSON.parse(data).id != user.id);
+      followed = followed.filter(
+        (data) => JSON.parse(data).id != currentUser.$id
+      );
     } else {
-      followers.push(user.id);
-      followed.push(currentUser.$id);
+      followers.push(
+        `{"id": "${user.id}", "name": "${user.name}", "username": "${user.username}", "imgUrl" : "${user.imageUrl}"}`
+      );
+      followed.push(
+        `{"id": "${currentUser.$id}", "name": "${currentUser.name}", "username": "${currentUser.username}", "imgUrl" : "${currentUser.imageUrl}"}`
+      );
     }
     updateFollowers({
       userId: user.id,
@@ -171,7 +174,7 @@ const Profile = () => {
               <Button
                 type="button"
                 className={`${
-                  checkisFollowing(user.id)
+                  checkIsFollowed(currentUser.followers, user.id)
                     ? "!bg-dark-4 "
                     : "shad-button_primary"
                 } px-8`}
@@ -179,7 +182,7 @@ const Profile = () => {
               >
                 {isUpdatingFollowers ? (
                   <Loader />
-                ) : checkisFollowing(user.id) ? (
+                ) : checkIsFollowed(currentUser.followers, user.id) ? (
                   "Following"
                 ) : (
                   "Follow"
