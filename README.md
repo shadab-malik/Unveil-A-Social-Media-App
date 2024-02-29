@@ -1,3 +1,6 @@
+# Preview
+![Unveil](https://github.com/shadab-malik/Unveil-A-Social-Media-App/blob/master/README.md)
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
