@@ -13,6 +13,7 @@ type UserCardProps = {
 const UserCard = ({ user: currentUser }: UserCardProps) => {
   const { user } = useUserContext();
 
+  
   return (
     <Link to={`/profile/${currentUser.$id}`} className="user-card">
       <img
