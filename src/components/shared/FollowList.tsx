@@ -1,29 +1,23 @@
-// import { Models } from "appwrite";
 import { Link } from "react-router-dom";
-
 import { Button } from "../ui/button";
 import { useUserContext } from "@/context/AuthContext";
-import { useGetUserById } from "@/lib/react-query/queriesAndMutations";
+import { checkIsFollowed } from "@/lib/utils";
 
 type FollowListModelProps = {
-  followerId: string;
+  followerData: string;
 };
 
-const checkIsFollowed = (followed: string[], userId: string) => {
-  return followed.includes(userId);
-};
-
-const FollowListModel = ({ followerId }: FollowListModelProps) => {
+const FollowListModel = ({ followerData }: FollowListModelProps) => {
   const { user } = useUserContext();
-  const { data: followerUser } = useGetUserById(followerId || "");
+  const followerUser = JSON.parse(followerData);
 
   return (
     <div className="flex justify-between gap-3 ">
       <div>
-        <Link to={`/profile/${followerId}`} className="flex gap-2">
+        <Link to={`/profile/${followerUser.id}`} className="flex gap-2">
           <img
             src={
-              followerUser?.imageUrl || "/assets/icons/profile-placeholder.svg"
+              followerUser?.imgUrl || "/assets/icons/profile-placeholder.svg"
             }
             alt="creator"
             className="rounded-full w-14 h-14"
@@ -44,14 +38,16 @@ const FollowListModel = ({ followerId }: FollowListModelProps) => {
           type="button"
           size="sm"
           className={`${
-            user.id === followerId
+            user.id === followerUser.id
               ? "hidden"
-              : checkIsFollowed(user.followed, followerId)
+              : checkIsFollowed(user.followed, followerUser.id)
               ? "!bg-dark-4 "
               : "shad-button_primary"
           } px-5`}
         >
-          {checkIsFollowed(user.followed, followerId) ? "Following" : "Follow"}
+          {checkIsFollowed(user.followed, followerUser.id)
+            ? "Following"
+            : "Follow"}
         </Button>
       </div>
     </div>

@@ -3,14 +3,12 @@ import { Link } from "react-router-dom";
 
 import { Button } from "../ui/button";
 import { useUserContext } from "@/context/AuthContext";
+import { checkIsFollowed } from "@/lib/utils";
 
 type UserCardProps = {
   user: Models.Document;
 };
 
-const checkIsFollowed = (followed: string[], userId: string) => {
-  return followed.includes(userId);
-};
 
 const UserCard = ({ user: currentUser }: UserCardProps) => {
   const { user } = useUserContext();
