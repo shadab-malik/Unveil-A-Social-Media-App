@@ -1,5 +1,5 @@
 # Preview
-<img src="[https://your-image-url.type](https://raw.githubusercontent.com/shadab-malik/Unveil-A-Social-Media-App/master/public/assets/images/side-img.png)" width="100" height="100">
+<img src="https://raw.githubusercontent.com/shadab-malik/Unveil-A-Social-Media-App/master/public/assets/images/side-img.png" width="500" height="500">
 
 # React + TypeScript + Vite
 
