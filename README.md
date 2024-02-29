@@ -1,5 +1,5 @@
 # Preview
-![Unveil](https://raw.githubusercontent.com/shadab-malik/Unveil-A-Social-Media-App/master/public/assets/images/side-img.png){:width="200px" height="200px"}
+<img src="[https://your-image-url.type](https://raw.githubusercontent.com/shadab-malik/Unveil-A-Social-Media-App/master/public/assets/images/side-img.png)" width="100" height="100">
 
 # React + TypeScript + Vite
 
