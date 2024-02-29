@@ -1,5 +1,5 @@
 # Preview
-<img src="https://raw.githubusercontent.com/shadab-malik/Unveil-A-Social-Media-App/master/public/assets/images/side-img.png" width="500" height="500">
+<img src="https://raw.githubusercontent.com/shadab-malik/Unveil-A-Social-Media-App/master/public/assets/images/side-img.png" width="500" height="500"> <img src="https://raw.githubusercontent.com/shadab-malik/Unveil-A-Social-Media-App/8a13345b9d59048553accfb3760b48df321c9ee7/public/assets/images/logo.svg" width="500" height="500"/>
 
 # React + TypeScript + Vite
 
