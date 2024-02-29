@@ -6,8 +6,6 @@ import {
   useParams,
   useLocation,
 } from "react-router-dom";
-
-import { LikedPosts } from "@/pages/private";
 import { useUserContext } from "@/context/AuthContext";
 import {
   useGetUserById,
@@ -16,55 +14,12 @@ import {
 import Loader from "@/components/shared/Loader";
 import { Button } from "@/components/ui/button";
 import GridPostList from "@/components/shared/GridPostList";
-
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import FollowList from "@/components/shared/FollowList";
+import FollowListModel from "@/components/shared/FollowListModel";
 import { checkIsFollowed } from "@/lib/utils";
-
-interface StabBlockProps {
-  value: string | number;
-  label: string;
-  list: string[];
-}
-
-const StatBlock = ({ value, label, list }: StabBlockProps) => (
-  <Dialog>
-    <DialogTrigger>
-      <div className="flex-center gap-2">
-        <p className="small-semibold lg:body-bold text-primary-500">{value}</p>
-        <p className="small-medium lg:base-medium text-light-2">{label}</p>
-      </div>
-    </DialogTrigger>
-    <DialogContent className="bg-dark-2">
-      <DialogHeader>
-        <DialogTitle>{label}</DialogTitle>
-      </DialogHeader>
-      <div>
-        {list.length === 0 ? (
-          `No ${label}`
-        ) : (
-          <ul className="flex-row w-full">
-            {list?.map((data) => (
-              <li key={data} className="flex-row min-w-[200px] w-full p-4">
-                <FollowList followerData={data} />
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </DialogContent>
-  </Dialog>
-);
 
 const Profile = () => {
   const { id } = useParams();
-  const { user } = useUserContext();
+  const { user, setUser } = useUserContext();
   const { pathname } = useLocation();
   const { data: currentUser } = useGetUserById(id || "");
 
@@ -103,6 +58,10 @@ const Profile = () => {
       followedUserId: currentUser.$id,
       followers,
     });
+    setUser({
+      ...user,
+      followed: followed,
+    });
   };
 
   return (
@@ -134,12 +93,12 @@ const Profile = () => {
                   Posts
                 </p>
               </div>
-              <StatBlock
+              <FollowListModel
                 value={currentUser.followers.length || 0}
                 label="Followers"
                 list={currentUser.followers}
               />
-              <StatBlock
+              <FollowListModel
                 value={currentUser.followed.length || 0}
                 label="Following"
                 list={currentUser.followed}
@@ -232,7 +191,12 @@ const Profile = () => {
           element={<GridPostList posts={currentUser.posts} showUser={false} />}
         />
         {currentUser.$id === user.id && (
-          <Route path="/liked-posts" element={<LikedPosts />} />
+          <Route
+            path="/liked-posts"
+            element={
+              <GridPostList posts={currentUser.liked} showStats={false} />
+            }
+          />
         )}
       </Routes>
       <Outlet />

@@ -16,7 +16,7 @@ const GridPostList = ({
   showStats = true,
 }: GridPostListProps) => {
   const { user } = useUserContext();
-
+  if(posts?.length===0) return <p className="text-light-4">No posts available</p>;
   return (
     <ul className="grid-container">
       {posts?.map((post) => (

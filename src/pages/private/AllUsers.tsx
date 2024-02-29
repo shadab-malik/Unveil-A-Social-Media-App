@@ -53,7 +53,7 @@ const AllUsers = () => {
                     key={creator?.$id}
                     className="flex-1 min-w-[200px] w-full"
                   >
-                    <UserCard user={creator} />
+                    <UserCard  user={creator} />
                   </li>
                 ))
             )}
